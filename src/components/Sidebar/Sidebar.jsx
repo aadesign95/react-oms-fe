@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   return (
     <div className="w-64 h-screen bg-gray-50 border-r border-slate-200 text-white flex flex-col">
-      <div className="px-4 flex gap-2 items-center mb-4 border-b border-slate-200">
+      <div className="px-4 flex gap-2 items-center  border-b border-slate-200">
         <svg
           className="fill-indigo-600"
           id="logo-64"
@@ -67,10 +67,11 @@ const Sidebar = () => {
         </svg>
         <h1 className="text-xl font-bold text-indigo-600">Stockify</h1>
       </div>
-      <nav className="flex-1 p-4 space-y-2 text-black">
+      <nav className="flex-1 p-4 px-2 text-black">
+        <span className="text-xs text-slate-500">Overview</span>
         <Link
           to="/dashboard"
-          className=" px-4 py-3 rounded hover:bg-slate-200 flex gap-2 items-center"
+          className=" px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 flex gap-2 items-center text-sm"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,11 +87,14 @@ const Sidebar = () => {
               d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
             />
           </svg>
-          Dashbaoard
+          Dashboard
         </Link>
+        <span className="text-xs text-slate-500 mt-4 block">
+          Transaction & Report
+        </span>
         <Link
           to="/transaction"
-          className="flex gap-2 items-center px-4 py-3 rounded hover:bg-slate-200"
+          className="flex gap-2 items-center px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -108,34 +112,224 @@ const Sidebar = () => {
           </svg>
           Transactions
         </Link>
-        <Link
-          to="/dashboard/settings"
-          className="flex gap-2 items-center px-4 py-3 rounded hover:bg-slate-200"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-            />
-          </svg>
-          Reports
-        </Link>
-        {/* Dropdown Menu */}
+        {/* Report */}
         <div>
           <button
             onClick={toggleDropdown}
-            className="w-full text-left px-4 py-3 rounded hover:bg-slate-200"
+            className="w-full text-left px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600"
           >
             <div className="flex items-center justify-between">
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center  text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                  />
+                </svg>
+                Reports
+              </div>
+              <div>
+                {/* Conditionally render the icon */}
+                {isDropdownOpen ? (
+                  <ChevronUpIcon className="w-5 h-5" />
+                ) : (
+                  <ChevronDownIcon className="w-5 h-5" />
+                )}
+              </div>
+            </div>
+          </button>
+          {isDropdownOpen && (
+            <div className="pl-6 space-y-2">
+              <Link
+                to="/settings/general"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                General
+              </Link>
+              <Link
+                to="/settings/account"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                Account
+              </Link>
+            </div>
+          )}
+        </div>
+        <span className="text-xs text-slate-500 mt-4 block">
+          Stock Management
+        </span>
+        {/* Produk */}
+        <div>
+          <button
+            onClick={toggleDropdown}
+            className="w-full text-left px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2 items-center  text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                  />
+                </svg>
+                Produk
+              </div>
+              <div>
+                {/* Conditionally render the icon */}
+                {isDropdownOpen ? (
+                  <ChevronUpIcon className="w-5 h-5" />
+                ) : (
+                  <ChevronDownIcon className="w-5 h-5" />
+                )}
+              </div>
+            </div>
+          </button>
+          {isDropdownOpen && (
+            <div className="pl-6 space-y-2">
+              <Link
+                to="/settings/general"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                General
+              </Link>
+              <Link
+                to="/settings/account"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                Account
+              </Link>
+            </div>
+          )}
+        </div>
+        {/* Inventory */}
+        <div>
+          <button
+            onClick={toggleDropdown}
+            className="w-full text-left px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2 items-center  text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
+                  />
+                </svg>
+                Inventory
+              </div>
+              <div>
+                {/* Conditionally render the icon */}
+                {isDropdownOpen ? (
+                  <ChevronUpIcon className="w-5 h-5" />
+                ) : (
+                  <ChevronDownIcon className="w-5 h-5" />
+                )}
+              </div>
+            </div>
+          </button>
+          {isDropdownOpen && (
+            <div className="pl-6 space-y-2">
+              <Link
+                to="/settings/general"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                General
+              </Link>
+              <Link
+                to="/settings/account"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                Account
+              </Link>
+            </div>
+          )}
+        </div>
+        {/* Warehouse */}
+        <div>
+          <button
+            onClick={toggleDropdown}
+            className="w-full text-left px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2 items-center  text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819"
+                  />
+                </svg>
+                Warehouse
+              </div>
+              <div>
+                {/* Conditionally render the icon */}
+                {isDropdownOpen ? (
+                  <ChevronUpIcon className="w-5 h-5" />
+                ) : (
+                  <ChevronDownIcon className="w-5 h-5" />
+                )}
+              </div>
+            </div>
+          </button>
+          {isDropdownOpen && (
+            <div className="pl-6 space-y-2">
+              <Link
+                to="/settings/general"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                General
+              </Link>
+              <Link
+                to="/settings/account"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                Account
+              </Link>
+            </div>
+          )}
+        </div>
+        <span className="text-xs text-slate-500 mt-4 block">
+          Setting & Help Center
+        </span>
+        {/* Settting */}
+        <div>
+          <button
+            onClick={toggleDropdown}
+            className="w-full text-left px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2 items-center  text-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -171,13 +365,64 @@ const Sidebar = () => {
             <div className="pl-6 space-y-2">
               <Link
                 to="/settings/general"
-                className="block px-4 py-3 rounded hover:bg-slate-200"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
               >
                 General
               </Link>
               <Link
                 to="/settings/account"
-                className="block px-4 py-3 rounded hover:bg-slate-200"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                Account
+              </Link>
+            </div>
+          )}
+        </div>
+        {/* Help Cennter */}
+        <div>
+          <button
+            onClick={toggleDropdown}
+            className="w-full text-left px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2 items-center  text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.712 4.33a9.027 9.027 0 0 1 1.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 0 0-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 0 1 0 9.424m-4.138-5.976a3.736 3.736 0 0 0-.88-1.388 3.737 3.737 0 0 0-1.388-.88m2.268 2.268a3.765 3.765 0 0 1 0 2.528m-2.268-4.796a3.765 3.765 0 0 0-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 0 1-1.388.88m2.268-2.268 4.138 3.448m0 0a9.027 9.027 0 0 1-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0-3.448-4.138m3.448 4.138a9.014 9.014 0 0 1-9.424 0m5.976-4.138a3.765 3.765 0 0 1-2.528 0m0 0a3.736 3.736 0 0 1-1.388-.88 3.737 3.737 0 0 1-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 0 1-1.652-1.306 9.027 9.027 0 0 1-1.306-1.652m0 0 4.138-3.448M4.33 16.712a9.014 9.014 0 0 1 0-9.424m4.138 5.976a3.765 3.765 0 0 1 0-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 0 1 1.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 0 0-1.652 1.306A9.025 9.025 0 0 0 4.33 7.288"
+                  />
+                </svg>
+                Help Center
+              </div>
+              <div>
+                {/* Conditionally render the icon */}
+                {isDropdownOpen ? (
+                  <ChevronUpIcon className="w-5 h-5" />
+                ) : (
+                  <ChevronDownIcon className="w-5 h-5" />
+                )}
+              </div>
+            </div>
+          </button>
+          {isDropdownOpen && (
+            <div className="pl-6 space-y-2">
+              <Link
+                to="/settings/general"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
+              >
+                General
+              </Link>
+              <Link
+                to="/settings/account"
+                className="block px-4 py-3 rounded hover:bg-indigo-50 hover:text-indigo-600 text-sm"
               >
                 Account
               </Link>
